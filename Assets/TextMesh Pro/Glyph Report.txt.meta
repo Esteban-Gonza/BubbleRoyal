@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: c89cf70f56d318e468bf9aa042089efd
-NativeFormatImporter:
+guid: 2fb5d6fdd07f30e40a0f0c79997cc45b
+TextScriptImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
