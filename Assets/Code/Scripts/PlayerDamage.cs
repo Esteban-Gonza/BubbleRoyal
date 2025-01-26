@@ -33,6 +33,16 @@ public class PlayerDamage : MonoBehaviour
             SoundManager.Instance.PlaySound(damageSound);
             score++;
             player.UpdateScore(score);
+
+            if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1)
+            {
+
+                GameManager.Instance.ShowWinPanel("PLAYER 1");
+            }
+            else
+            {
+                GameManager.Instance.ShowWinPanel("PLAYER 2");
+            }
         }
     }
 
