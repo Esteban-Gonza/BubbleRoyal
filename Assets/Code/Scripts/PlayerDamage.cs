@@ -31,8 +31,8 @@ public class PlayerDamage : MonoBehaviour
         {
             //Debug.LogWarning("colision")
             SoundManager.Instance.PlaySound(damageSound);
-            score++;
-            player.UpdateScore(score);
+            //score++;
+            //player.UpdateScore(score);
 
             if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1)
             {
