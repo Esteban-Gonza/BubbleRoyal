@@ -24,6 +24,9 @@ public class PlayersMovement : MonoBehaviour
     public float maxFallSpeed = 18f;
     public float fallSpeedMultiplier = 2f;
 
+    [Header("Score")]
+    private int playerScore=0;
+
 
     // Update is called once per frame
     void Update()
@@ -79,5 +82,10 @@ public class PlayersMovement : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
+    }
+
+    public void UpdateScore(int score)
+    {
+        playerScore = score;
     }
 }
