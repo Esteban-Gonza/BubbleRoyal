@@ -87,5 +87,6 @@ public class PlayersMovement : MonoBehaviour
     public void UpdateScore(int score)
     {
         playerScore = score;
+        Debug.LogWarning(playerScore);
     }
 }

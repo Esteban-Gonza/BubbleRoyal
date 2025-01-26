@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
-
+    [Header("Score")]
     private int score;
 
     [SerializeField] private PlayersMovement player;
