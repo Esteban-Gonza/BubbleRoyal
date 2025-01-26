@@ -13,29 +13,70 @@ public class SpikeSpawner : MonoBehaviour
     [SerializeField] float maxSpawnDelay = 0.3f;
 
     private List<GameObject> spikePool;
-    private float timer;
+    private bool isSpawning = false;
+    private Coroutine spikeRainCoroutine;
 
-    private void Start()
+    void Start()
     {
-        StartSuddenDead();
+        InitializeSpikePool();
     }
 
-    void Update()
+    public void InitializeSpikePool()
     {
-        timer += Time.deltaTime;
-        if (timer >= spawnInterval)
+        spikePool = new List<GameObject>();
+        for (int i = 0; i < poolSize; i++)
         {
-            StartCoroutine(SpawnSpikeRainWithGap());
-            timer = 0f;
+            GameObject spike = Instantiate(spikePrefab);
+            spike.SetActive(false);
+            spikePool.Add(spike);
         }
     }
 
-    IEnumerator SpawnSpikeRainWithGap()
+    public void StartSpikeRain()
+    {
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            spikeRainCoroutine = StartCoroutine(SpawnSpikeRain());
+        }
+    }
+
+    public void StopSpikeRain()
+    {
+        isSpawning = false;
+
+        if (spikeRainCoroutine != null)
+        {
+            StopCoroutine(spikeRainCoroutine);
+        }
+
+        // Disable all active spikes
+        foreach (var spike in spikePool)
+        {
+            if (spike.activeInHierarchy)
+            {
+                spike.SetActive(false);
+            }
+        }
+    }
+
+    private IEnumerator SpawnSpikeRain()
+    {
+        while (isSpawning)
+        {
+            yield return SpawnSpikeRainWithGap();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
+
+    private IEnumerator SpawnSpikeRainWithGap()
     {
         int gapIndex = Random.Range(0, poolSize);
 
         for (int i = 0; i < poolSize; i++)
         {
+            if (!isSpawning) yield break;
+
             if (i == gapIndex) continue;
 
             GameObject spike = spikePool[i];
@@ -51,22 +92,12 @@ public class SpikeSpawner : MonoBehaviour
         }
     }
 
-    public void StartSuddenDead()
-    {
-        spikePool = new List<GameObject>();
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject spike = Instantiate(spikePrefab);
-            spike.SetActive(false);
-            spikePool.Add(spike);
-        }
-    }
-
     public void RecycleSpike(GameObject spike, Rigidbody2D playerRigid)
     {
         float randomX = Random.Range(minX, maxX);
         spike.transform.position = new Vector3(randomX, 6f, 0f);
         spike.SetActive(true);
+
         if(playerRigid.gravityScale >= 20)
         {
             playerRigid.gravityScale = 20;
