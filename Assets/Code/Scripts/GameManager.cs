@@ -200,8 +200,11 @@ public class GameManager : MonoBehaviour
         winBackgroundCG.blocksRaycasts = true;
 
         spikeSpawner.StopSpikeRain();
-
-        if (player1Rounds < 2 || player2Rounds < 2)
+        if(player1Rounds >= 2 || player2Rounds >= 2)
+        {
+            SetupFinalRound(playerWhoWon);
+        }
+        else 
         {
             isFinalRound = false;
 
@@ -210,10 +213,6 @@ public class GameManager : MonoBehaviour
 
             playAgainBtn.SetActive(false);
             mainMenuBtn.SetActive(false);  
-        }
-        else if(player1Rounds >= 2 || player2Rounds >= 2)
-        {
-            SetupFinalRound(playerWhoWon);
         }
     }
 
