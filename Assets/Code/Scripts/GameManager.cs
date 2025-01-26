@@ -48,9 +48,13 @@ public class GameManager : MonoBehaviour
 
     [Header("REFERENCES")]
     [SerializeField] private Transform transitionPanel;
+    [SerializeField] private Transform player1StartPosition;
+    [SerializeField] private Transform player2StartPosition;
     [SerializeField] private SpikeSpawner spikeSpawner;
     [SerializeField] private AudioClip transmi;
     [SerializeField] private AudioClip mainTheme;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
 
     private void Awake()
     {
@@ -132,10 +136,7 @@ public class GameManager : MonoBehaviour
             TogglePause();
         }
 
-        if (Input.GetKey(KeyCode.K))
-        {
-            ShowWinPanel("PLAYER 1");
-        }
+        
     }
 
     private void UpdateTimerText()
@@ -164,7 +165,17 @@ public class GameManager : MonoBehaviour
     public void ResetForNextRound()
     {
         isTimerRunning = false;
+        player1.GetComponent<PlayersMovement>().enabled = true;
+        player2.GetComponent<PlayersMovement>().enabled = true;
+        player1.GetComponent<PlayersMovement>().moveSpeed = 5;
+        player2.GetComponent<PlayersMovement>().moveSpeed = 5;
+        
+        player1.GetComponent<Animator>().SetBool("IsDead", false);
+        player2.GetComponent<Animator>().SetBool("IsDead", false);
+
+
         remainingTime = (startMinutes * 60) + startSeconds;
+        remainingTimeforRound = startSecondsRound;
 
         timerContainer.DOScale(Vector3.one, 1.5f);
         timerContainer.DOMoveY(1020, 1.5f);
@@ -185,6 +196,15 @@ public class GameManager : MonoBehaviour
         mainMenuBtn.SetActive(true);
     }
 
+    public void ResetPlayers()
+    {
+        player1.transform.position = player1StartPosition.position;
+        player2.transform.position = player2StartPosition.position;
+
+        player1.GetComponent<PlayersMovement>().enabled = false;
+        player2.GetComponent<PlayersMovement>().enabled = false;
+    }
+
     public void ShowWinPanel(string playerWhoWon)
     {
         if(playerWhoWon == "PLAYER 1")
@@ -196,7 +216,10 @@ public class GameManager : MonoBehaviour
             player2Rounds++;
         }
 
+        
+
         showingWinPanel = true;
+        isTimerRunning = false;
 
         winContainerGO.SetActive(true);
         

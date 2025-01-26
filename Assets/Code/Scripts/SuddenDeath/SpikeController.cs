@@ -31,11 +31,11 @@ public class SpikeController : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1 ) { 
             
-                GameManager.Instance.ShowWinPanel("PLAYER 1");
+                GameManager.Instance.ShowWinPanel("PLAYER 2");
             }
             else
             {
-                GameManager.Instance.ShowWinPanel("PLAYER 2");
+                GameManager.Instance.ShowWinPanel("PLAYER 1");
             }
         }
     }

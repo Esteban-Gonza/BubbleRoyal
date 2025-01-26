@@ -39,26 +39,26 @@ public class PlayerDamage : MonoBehaviour
             if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1)
             {
 
-                GameManager.Instance.ShowWinPanel("PLAYER 1");
+                OnPlayerDead("PLAYER 1");
+
             }
             else
             {
-                GameManager.Instance.ShowWinPanel("PLAYER 2");
+                OnPlayerDead("PLAYER 2");
+
             }
         }
     }
 
-    public void OnPlayerDead()
-    {
-        
-    }
-
-    private IEnumerator DeadFlow(string player)
+    public void OnPlayerDead(string playerName)
     {
         animator.SetBool("IsDead", true);
-        yield return new WaitForSeconds(2f);
-        GameManager.Instance.ShowWinPanel(player);
+        player.moveSpeed = 0;
+        GameManager.Instance.ResetPlayers();
+        GameManager.Instance.ShowWinPanel(playerName);
     }
+
+
     
 
 }
