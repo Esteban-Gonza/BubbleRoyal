@@ -27,6 +27,8 @@ public class PlayersMovement : MonoBehaviour
     [Header("Score")]
     private int playerScore=0;
 
+    [Header("Animation")]
+    public Animator animator;
 
     // Update is called once per frame
     void Update()
@@ -51,7 +53,16 @@ public class PlayersMovement : MonoBehaviour
     public void Move( InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x ;
-    }
+        if (horizontalMovement != 0)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
+        }
 
     public void Jump( InputAction.CallbackContext context)
     {
@@ -61,12 +72,20 @@ public class PlayersMovement : MonoBehaviour
             {
                 //Hold down jump button = full height
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                animator.SetBool("IsJumping", true);
+
             }
             else if (context.canceled) 
             {
                 //light tap of jump button = half the height
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+                animator.SetBool("IsJumping", true);
             }
+            
+        }
+        else
+        {
+            animator.SetBool("IsJumping", false);
         }
     }
     
@@ -74,6 +93,7 @@ public class PlayersMovement : MonoBehaviour
     {
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
         {
+            
             return true;
         }
         return false;
@@ -87,5 +107,6 @@ public class PlayersMovement : MonoBehaviour
     public void UpdateScore(int score)
     {
         playerScore = score;
+        Debug.LogWarning(playerScore);
     }
 }
