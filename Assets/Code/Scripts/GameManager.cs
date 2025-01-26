@@ -182,6 +182,15 @@ public class GameManager : MonoBehaviour
 
     public void ShowWinPanel(string playerWhoWon)
     {
+        if(playerWhoWon == "PLAYER 1")
+        {
+            player1Rounds++;
+        }
+        else if(playerWhoWon == "PLAYER 2")
+        {
+            player2Rounds++;
+        }
+
         showingWinPanel = true;
 
         winContainerGO.SetActive(true);
