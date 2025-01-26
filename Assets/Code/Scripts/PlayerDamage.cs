@@ -12,6 +12,10 @@ public class PlayerDamage : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioClip damageSound;
 
+    [Header("Animation")]
+    public Animator animator;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +33,8 @@ public class PlayerDamage : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player")) 
         {
-            //Debug.LogWarning("colision")
             SoundManager.Instance.PlaySound(damageSound);
-            //score++;
-            //player.UpdateScore(score);
+
 
             if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1)
             {
@@ -46,5 +48,17 @@ public class PlayerDamage : MonoBehaviour
         }
     }
 
+    public void OnPlayerDead()
+    {
+        
+    }
+
+    private IEnumerator DeadFlow(string player)
+    {
+        animator.SetBool("IsDead", true);
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.ShowWinPanel(player);
+    }
     
+
 }
