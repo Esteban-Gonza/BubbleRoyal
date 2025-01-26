@@ -337,6 +337,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_Layout_Atlas_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f6f08754905d644b1432bed145b2f3
+      internalID: -604217208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -357,6 +378,7 @@ TextureImporter:
       UI_Layout_Atlas_6: 2097931962
       UI_Layout_Atlas_7: -1431682201
       UI_Layout_Atlas_8: -1769358282
+      UI_Layout_Atlas_9: -604217208
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -63,4 +63,9 @@ public class MainMenu : MonoBehaviour
         creditsCG.DOFade(0f, 1f);
         transitionTransform.DOLocalMoveX(-1920, 1f).SetEase(Ease.InSine);
     }
+
+    public void GoToWebSite(string url)
+    {
+        Application.OpenURL(url);
+    }
 }
