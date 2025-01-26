@@ -60,11 +60,11 @@ public class PlayersMovement : MonoBehaviour
 
         if(horizontalMovement < previousHorizontalMovement)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
         else if(horizontalMovement > previousHorizontalMovement)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
 
         if (horizontalMovement != 0)
