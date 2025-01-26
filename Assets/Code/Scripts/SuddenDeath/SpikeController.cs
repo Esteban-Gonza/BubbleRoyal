@@ -29,7 +29,7 @@ public class SpikeController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1 ) { 
+            if (!collision.gameObject.GetComponent<PlayersMovement>().isPlayer1 ) { 
             
                 GameManager.Instance.ShowWinPanel("PLAYER 1");
             }
