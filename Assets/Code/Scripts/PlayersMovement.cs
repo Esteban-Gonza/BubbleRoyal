@@ -32,6 +32,9 @@ public class PlayersMovement : MonoBehaviour
 
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip jumpingSound;
+
     // Update is called once per frame
     void Update()
     {
@@ -82,26 +85,8 @@ public class PlayersMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-            //if (context.performed)
-            //{
-            //    //Hold down jump button = full height
-            //    rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            //    //animator.SetBool("IsJumping", false);
-
-            //}
-            //else if (context.canceled) 
-            //{
-            //    //light tap of jump button = half the height
-            //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            //}
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-            
-            
-        }
-        else
-        {
-            //animator.SetBool("IsJumping", isGrounded());
-           // animator.SetBool("IsJumping", false);
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower); 
+            SoundManager.Instance.PlaySound(jumpingSound);
         }
         
     }

@@ -9,6 +9,9 @@ public class PlayerDamage : MonoBehaviour
 
     [SerializeField] private PlayersMovement player;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip damageSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class PlayerDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) 
         {
             //Debug.LogWarning("colision")
+            SoundManager.Instance.PlaySound(damageSound);
             score++;
             player.UpdateScore(score);
         }
