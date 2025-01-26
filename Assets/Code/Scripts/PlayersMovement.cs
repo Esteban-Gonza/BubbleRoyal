@@ -30,11 +30,14 @@ public class PlayersMovement : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     // Update is called once per frame
     void Update()
     {
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
         Gravity();
+        animator.SetBool("IsJumping", !isGrounded());
     }
 
     private void Gravity()
@@ -52,7 +55,18 @@ public class PlayersMovement : MonoBehaviour
 
     public void Move( InputAction.CallbackContext context)
     {
+        float previousHorizontalMovement = horizontalMovement;
         horizontalMovement = context.ReadValue<Vector2>().x ;
+
+        if(horizontalMovement < previousHorizontalMovement)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if(horizontalMovement > previousHorizontalMovement)
+        {
+            spriteRenderer.flipX = true;
+        }
+
         if (horizontalMovement != 0)
         {
             animator.SetBool("IsMoving", true);
@@ -68,25 +82,28 @@ public class PlayersMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-            if (context.performed)
-            {
-                //Hold down jump button = full height
-                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
-                animator.SetBool("IsJumping", true);
+            //if (context.performed)
+            //{
+            //    //Hold down jump button = full height
+            //    rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            //    //animator.SetBool("IsJumping", false);
 
-            }
-            else if (context.canceled) 
-            {
-                //light tap of jump button = half the height
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-                animator.SetBool("IsJumping", true);
-            }
+            //}
+            //else if (context.canceled) 
+            //{
+            //    //light tap of jump button = half the height
+            //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            //}
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            
             
         }
         else
         {
-            animator.SetBool("IsJumping", false);
+            //animator.SetBool("IsJumping", isGrounded());
+           // animator.SetBool("IsJumping", false);
         }
+        
     }
     
     private bool isGrounded()

@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 333552613}
   - component: {fileID: 333552612}
   - component: {fileID: 333552611}
+  - component: {fileID: 333552617}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -349,7 +350,8 @@ MonoBehaviour:
   baseGravity: 2
   maxFallSpeed: 14
   fallSpeedMultiplier: 2
-  animator: {fileID: 0}
+  animator: {fileID: 333552617}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &333552612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +619,27 @@ Transform:
   - {fileID: 261884472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &333552617
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333552610}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 934aeb7d9e526454591b10888ac506fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1311172442
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +858,7 @@ MonoBehaviour:
   maxFallSpeed: 14
   fallSpeedMultiplier: 2
   animator: {fileID: 1313523647}
+  spriteRenderer: {fileID: 1313523643}
 --- !u!114 &1313523646
 MonoBehaviour:
   m_ObjectHideFlags: 0
