@@ -2,29 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string gameScene;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private Image transitionGameImg;
+    [SerializeField] private Image transitionImg;
+    [SerializeField] private CanvasGroup creditsCG;
 
-    public void Play()
+    private void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        transitionGameImg.transform.DOLocalMoveX(-1920f, 1f).SetEase(Ease.InSine);
     }
 
     public void Exit()
     {
-        Debug.Log("Exit");
+        StartCoroutine(TransitionToExit());
+    }
+
+    public void PlayGame()
+    {
+        StartCoroutine(TransitionToGame());
+    }
+
+    private IEnumerator TransitionToGame()
+    {
+        transitionGameImg.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.InSine);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(gameScene);
+    }
+    
+    private IEnumerator TransitionToExit()
+    {
+        transitionImg.transform.DOLocalMoveX(0f, 1f).SetEase(Ease.InSine);
+        yield return new WaitForSeconds(1f);
         Application.Quit();
+    }
+    
+    public void TransitionToCredits()
+    {
+        creditsCG.DOFade(1f, 1f);
+        transitionImg.transform.DOLocalMoveX(0, 1f).SetEase(Ease.InSine);
+    }
+    
+    public void TransitionFromCredits()
+    {
+        creditsCG.DOFade(0f, 1f);
+        transitionImg.transform.DOLocalMoveX(-1920, 1f).SetEase(Ease.InSine);
+    }
+
+    public void SetImageInSpace(Vector3 newLocation)
+    {
+        transitionImg.transform.position = newLocation;
     }
 }
