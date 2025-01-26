@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayersMovement : MonoBehaviour
 {
+    public bool isPlayer1;
+    
     public Rigidbody2D rb;
     [Header("Movement")]
     public float moveSpeed = 5f;

@@ -27,6 +27,16 @@ public class SpikeController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.gameObject.GetComponent<PlayersMovement>().isPlayer1 ) { 
+            
+                GameManager.Instance.ShowWinPanel("PLAYER 1");
+            }
+            else
+            {
+                GameManager.Instance.ShowWinPanel("PLAYER 2");
+            }
+        }
     }
 }
