@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] private Transform transitionPanel;
     [SerializeField] private SpikeSpawner spikeSpawner;
+    [SerializeField] private AudioClip transmi;
+    [SerializeField] private AudioClip mainTheme;
 
     private void Awake()
     {
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartTimerWithDelay()
     {
+        SoundManager.Instance.PlaySound(transmi);
         timerText.text = "3";
         yield return new WaitForSeconds(1);
         timerText.text = "2";
@@ -89,6 +92,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         isTimerRunning = true;
+
+        SoundManager.Instance.PlaySound(mainTheme);
 
         UpdateTimerText();
     }
