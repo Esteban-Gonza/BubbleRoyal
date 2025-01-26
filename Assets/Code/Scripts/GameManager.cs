@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -165,8 +166,8 @@ public class GameManager : MonoBehaviour
     public void ResetForNextRound()
     {
         isTimerRunning = false;
-        player1.GetComponent<PlayersMovement>().enabled = true;
-        player2.GetComponent<PlayersMovement>().enabled = true;
+        player1.GetComponent<PlayerInput>().enabled = true;
+        player2.GetComponent<PlayerInput>().enabled = true;
         player1.GetComponent<PlayersMovement>().moveSpeed = 5;
         player2.GetComponent<PlayersMovement>().moveSpeed = 5;
         
@@ -201,8 +202,8 @@ public class GameManager : MonoBehaviour
         player1.transform.position = player1StartPosition.position;
         player2.transform.position = player2StartPosition.position;
 
-        player1.GetComponent<PlayersMovement>().enabled = false;
-        player2.GetComponent<PlayersMovement>().enabled = false;
+        player1.GetComponent<PlayerInput>().enabled = false;
+        player2.GetComponent<PlayerInput>().enabled = false;
     }
 
     public void ShowWinPanel(string playerWhoWon)
@@ -215,8 +216,6 @@ public class GameManager : MonoBehaviour
         {
             player2Rounds++;
         }
-
-        
 
         showingWinPanel = true;
         isTimerRunning = false;
