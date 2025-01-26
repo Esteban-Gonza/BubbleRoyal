@@ -10541,6 +10541,8 @@ MonoBehaviour:
   startSeconds: 6
   transitionPanel: {fileID: 116894043}
   spikeSpawner: {fileID: 1789848082}
+  transmi: {fileID: 8300000, guid: 694527a4b29f8274eb0e0ce1e7d082b2, type: 3}
+  mainTheme: {fileID: 8300000, guid: ee17500d9f9778e4f873424e11dcabc0, type: 3}
 --- !u!4 &1554917735
 Transform:
   m_ObjectHideFlags: 0
